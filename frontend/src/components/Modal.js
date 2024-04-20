@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import '../css/Modal.css'
 
-function Modal({ open, onClose, title, tldr, content }) {
+function Modal({ open, onClose, title, tldr, content, imgURL }) {
     const modalRef = useRef();
 
     const closeModal = (e) => {
@@ -21,22 +21,16 @@ function Modal({ open, onClose, title, tldr, content }) {
                 <br />
                 <div className='modalContent'>
                     <img className='images'
-                    src={'https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png'}
+                    src={imgURL}
                     alt={'lebron my baby'}
                     ></img>
                     <br />
-                    <div>{tldr}</div>
+                    <div style={{ whiteSpace: 'pre-line' }}>
+                        TL;DR: {tldr}</div>
                     <br />
                     <div>{content}</div>  <br />
-                    <div className="gradient-blur"></div>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
                 </div>
-                
+                <br />
             </div>
         </div>
     );

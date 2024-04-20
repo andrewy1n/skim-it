@@ -17,14 +17,21 @@ h1 {
 }
 
 .modalContent {
-    height:80vh;
+    height: 50%;
+    padding-top: 17vw;
     width: 100%;
     overflow-y: auto;
-    scrollbar-color: #888 #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    scroll-padding-bottom: 2rem;
 }
 
 .images {
-    width: 100%;
+    width: 80vh;
+    display: block;
+    border-radius: 10px;
 }
 
 .closeButton {

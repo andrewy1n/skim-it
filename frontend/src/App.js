@@ -73,10 +73,10 @@ function App() {
             onChange={handleSearch}
           />
       </div>
+      <br />
         <div className='articleContainer'>
           {news.map((article, index) => {
             if (news.length === index + 1) {
-              console.log(article.url)
               return (
                 <button 
                   ref = {lastArticleElementRef}
@@ -86,11 +86,12 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
-                  setImgURL(article.imgurl);
+                  setImgURL(article.imgURL);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
-                      <img className='bait' src={'https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png'}></img>
+                      <br />
+                      <img className='bait' src={article.imgURL}></img>
                     </div>
                   </button>
               )
@@ -103,11 +104,12 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
-                  setImgURL(article.imgurl);
+                  setImgURL(article.imgURL);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
-                      <img className='bait' src={'https://cdn.nba.com/headshots/nba/latest/1040x760/2544.png'}></img>
+                      <br />
+                      <img className='bait' src={article.imgURL}></img>
                     </div>
                   </button>
                       )
@@ -123,7 +125,7 @@ function App() {
           title={selection}
           tldr={tldr}
           content={content}
-          imageURL={imgURL}/>
+          imgURL={imgURL}/>
       </div>
   );
 }

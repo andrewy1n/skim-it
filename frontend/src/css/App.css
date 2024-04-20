@@ -67,6 +67,10 @@
 .fishing {
   padding-top: 1rem;
   padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .fishing:hover {
@@ -75,11 +79,12 @@
 }
 
 .hook {
-  width: 100%;
+  width: 90%;
   font-weight: bold;
   font-size: large;
 }
 
 .bait {
-  width: 80%;
+  width:90%;
+  border-radius: 10px;
 }

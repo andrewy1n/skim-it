@@ -17,7 +17,7 @@ function NewSearch(query, pageNumber) {
         let cancel;
         axios({
             method: 'GET',
-            url: 'http://127.0.0.1:8000/search',
+            url: 'http://10.9.47.164:8000/search',
             params: {page: pageNumber,  q: query},
             cancelToken: new axios.CancelToken(c => cancel = c) //cancel on new query
         }).then(result => {
@@ -27,6 +27,7 @@ function NewSearch(query, pageNumber) {
                         title: article.title, 
                         tldr: article.description,
                         content: article.content,
+                        imgURL: article.urlToImage,
                     }
                     }
                     )])];
