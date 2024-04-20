@@ -2,6 +2,3 @@ from backend.gen_news_script import generate_all_news, parse_article_gemini, pri
 
 
 print_sources()
-
-articles = generate_all_news()
-

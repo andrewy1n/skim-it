@@ -36,6 +36,9 @@ with open("backend/hook_title_prompt.txt", "r") as file:
 with open("backend/summary_prompt.txt", "r") as file:
     summary_prompt = file.read()
 
+with open("backend/tldr_prompt.txt", "r") as file:
+    tldr_prompt = file.read()
+
 def generate_top_news(search_query = None):
     top_headlines = newsapi.get_top_headlines(q=search_query,
                                           language='en',
@@ -50,18 +53,25 @@ def generate_all_news(search_query = None):
     two_weeks_from_now = two_weeks_from_now.strftime("%Y-%m-%d")
     current_date = current_date.strftime("%Y-%m-%d")
 
+    sources = newsapi.get_sources(country='us', language='en')
+    source_str = ""
+    # Get first 20 news article sources
+    for source in sources['sources'][20:]:
+        source_str += source['id'] + ","
+
     top_headlines = newsapi.get_everything(q=search_query,
                                           language='en',
                                           from_param=two_weeks_from_now,
                                           to=current_date,
-                                          sources='nbc-news, polygon, politico, newsweek, msnbc',
+                                          sources=source_str,
                                           page=2)
     return top_headlines['articles']
 
 def print_sources():
-    sources = newsapi.get_sources(country='us')
+    sources = newsapi.get_sources(country='us', language='en')
 
-    print(sources)
+    for source in sources['sources']:
+        print(source['id'])
 
 # Returns a dict of generated title and summary
 def parse_article_gemini(article_obj: dict) -> tuple:
@@ -97,12 +107,21 @@ def parse_article_gemini(article_obj: dict) -> tuple:
         }
     ]
 
+    tldr_message = [
+        {
+            'role' : 'user',
+            'parts' : tldr_prompt + full_text
+        }
+    ]
+
     title_response = model.generate_content(title_message)
     summary_response = model.generate_content(summary_message)
+    tldr_response = model.generate_content(tldr_message)
     
     try:
         generated_content['title'] = title_response.text
         generated_content['summary'] = summary_response.text
+        generated_content['tldr'] = tldr_response.text
         return generated_content
     except Exception as e:
         print("Gemini text issue")

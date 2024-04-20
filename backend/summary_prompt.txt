@@ -1,2 +1,3 @@
-System: Generate a 3 sentence summary separated into 3 bullet points that fully encapsulates the contents of the given article
-Article:  
+System: Generate 3 bullet points summary that fully encapsulates the contents of the given article, these bullet points should be concise
+Specifications: Use the bullet point character for each bullet points
+Article: 

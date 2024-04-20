@@ -2,9 +2,15 @@ import firebase_admin
 from firebase_admin import credentials, db
 from backend.gen_news_script import generate_all_news, parse_article_gemini
 import json
+from dotenv import load_dotenv
+import os
 
-cred = credentials.Certificate("backend/skim-it-566ae-firebase-adminsdk-420z2-381613649b.json")
-firebase_app = firebase_admin.initialize_app(cred, {'databaseURL':"https://skim-it-566ae-default-rtdb.firebaseio.com"})
+load_dotenv()
+
+FIREBASE_CERTIFICATE_PATH = os.getenv("FIREBASE_CERTIFICATE_PATH")
+FIREBASE_URL = os.getenv("FIREBASE_URL")
+cred = credentials.Certificate(FIREBASE_CERTIFICATE_PATH)
+firebase_app = firebase_admin.initialize_app(cred, {'databaseURL': FIREBASE_URL})
 
 articles = generate_all_news()
 
@@ -18,6 +24,8 @@ for article in articles:
     
     article['title'] = parsed_obj['title'].replace('*', '')
     article['description'] = parsed_obj['summary']
+    article['tldr'] = parsed_obj['tldr']
+    article['score'] = 0
     
     article_json = json.dumps(article)
 

@@ -42,7 +42,7 @@ function App() {
   // search function
   function handleSearch(e) {
     setQuery(e.target.value);
-    setPageNumber(1);
+    setPageNumber(0);
   }
 
   useEffect(() => {

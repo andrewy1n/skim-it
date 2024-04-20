@@ -11,9 +11,9 @@ firebase_app = firebase_admin.initialize_app(cred, {'databaseURL':"https://skim-
 ref = db.reference("/")
 
 # Initialize Algolia client
-ANGOLIA_ADMIN_API_KEY = os.getenv("ANGOLIA_ADMIN_API_KEY")
-ANGOLIA_APP_ID = os.getenv("ANGOLIA_APP_ID")
-client = SearchClient.create(ANGOLIA_APP_ID, ANGOLIA_ADMIN_API_KEY)
+ALGOLIA_ADMIN_API_KEY = os.getenv("ALGOLIA_API_KEY")
+ALGOLIA_APP_ID = os.getenv("ALGOLIA_APP")
+client = SearchClient.create(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY)
 index = client.init_index('Skim-it')
 
 all_items = ref.get()
