@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload build repository
-          path: './build'
+          path: './frontend/build'
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Deploy to GitHub Pages
