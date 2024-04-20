@@ -11,6 +11,8 @@ function App() {
   const [tldr, setTldr] = useState('');
   const [content, setContent] = useState('');
   const [imgURL, setImgURL] = useState('');
+  const [key, setKey] = useState('');
+  const [score, setScore] = useState(0);
 
   const [query, setQuery] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
@@ -88,6 +90,8 @@ function App() {
                   setTldr(article.tldr);
                   setContent(article.content);
                   setImgURL(article.urlToImage);
+                  setKey(article.key);
+                  setScore(article.score);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
@@ -106,6 +110,8 @@ function App() {
                   setTldr(article.tldr);
                   setContent(article.content);
                   setImgURL(article.urlToImage);
+                  setKey(article.key);
+                  setScore(article.score);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
@@ -126,7 +132,9 @@ function App() {
           title={selection}
           tldr={tldr}
           content={content}
-          imgURL={imgURL}/>
+          imgURL={imgURL}
+          key={key}
+          score={score}/>
       </div>
   );
 }

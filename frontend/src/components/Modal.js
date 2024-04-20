@@ -1,13 +1,30 @@
 import React, { useRef } from 'react'
 import '../css/Modal.css'
+import axios from 'axios'
 
-function Modal({ open, onClose, title, tldr, content, imgURL }) {
+function Modal({ open, onClose, title, tldr, content, imgURL, key, score }) {
     const modalRef = useRef();
 
     const closeModal = (e) => {
         if (modalRef.current === e.target) {
             onClose();
         }
+    }
+
+    const handleDislike = () => {
+        axios.put({
+            method: 'PUT',
+            url: 'http://10.9.47.164:8000/score',
+            params: { key: key, isLike: false }
+        })
+    }
+
+    const handleLike = () => {
+        axios.put({
+            method: 'PUT',
+            url: 'http://10.9.47.164:8000/score',
+            params: { key: key, isLike: false }
+        })
     }
 
     if(!open) { return null; }
@@ -37,8 +54,9 @@ function Modal({ open, onClose, title, tldr, content, imgURL }) {
                 </div>
                 <br />
                 <div className='modalHeader'>
-                    <button>I DISLIKE</button>
-                    <button>I LIKE</button>
+                    <button onClick={handleDislike}>I DISLIKE</button>
+                    <div>{score}</div>
+                    <button onClick={handleLike}>I LIKE</button>
                 </div>
             </div>
         </div>
