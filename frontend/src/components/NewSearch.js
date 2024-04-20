@@ -17,11 +17,11 @@ function NewSearch(query, pageNumber) {
         let cancel;
         axios({
             method: 'GET',
-            url: 'http://openlibrary.org/search.json',
+            url: 'http://127.0.0.1:8000/search',
             params: { q: query, page: pageNumber},
             cancelToken: new axios.CancelToken(c => cancel = c) //cancel on new query
         }).then(result => {
-            console.log(result.data)
+            console.log(result.item)
             setNews(prevNews => {
                 return [...new Set([...prevNews, ...result.data.docs.map(article => 
                     {return {
