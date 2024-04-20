@@ -33,7 +33,7 @@ function Modal({ open, onClose, title, tldr, content, imgURL }) {
                     <div style={{ whiteSpace: 'pre-line' }}>
                         TL;DR: {tldr}</div>
                     <br />
-                    <div>{content}</div>  <br />
+                    {/* <div>{content}</div>  <br /> */}
                 </div>
                 <br />
                 <div className='modalHeader'>

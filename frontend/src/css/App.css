@@ -37,7 +37,7 @@
 
 .searchField:focus {
   outline: none;
-  border-color: red;
+  border-color: black;
 }
 
 .articleContainer {

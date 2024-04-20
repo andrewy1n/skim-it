@@ -22,15 +22,7 @@ function NewSearch(query, pageNumber) {
             cancelToken: new axios.CancelToken(c => cancel = c) //cancel on new query
         }).then(result => {
             setNews(prevNews => {
-                return [...new Set([...prevNews, ...result.data.items.map(article => 
-                    {return {
-                        title: article.title, 
-                        tldr: article.description,
-                        content: article.content,
-                        imgURL: article.urlToImage,
-                    }
-                    }
-                    )])];
+                return [...new Set([...prevNews, ...result.data.items])];
             })
             setHasMore(result.data.items.length > 0)
             setLoading(false);

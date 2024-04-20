@@ -87,12 +87,12 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
-                  setImgURL(article.imgURL);
+                  setImgURL(article.urlToImage);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
                       <br />
-                      <img className='bait' src={article.imgURL}></img>
+                      <img className='bait' src={article.urlToImage}></img>
                     </div>
                   </button>
               )
@@ -105,12 +105,12 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
-                  setImgURL(article.imgURL);
+                  setImgURL(article.urlToImage);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
                       <br />
-                      <img className='bait' src={article.imgURL}></img>
+                      <img className='bait' src={article.urlToImage}></img>
                     </div>
                   </button>
                       )
