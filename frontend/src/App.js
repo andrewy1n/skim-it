@@ -73,6 +73,7 @@ function App() {
             onChange={handleSearch}
           />
       </div>
+      <img className='flavor' src={logo} alt="Skim-It Logo"></img>
       <br />
         <div className='articleContainer'>
           {news.map((article, index) => {
