@@ -1,3 +1,40 @@
+.headerBlock {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  z-index: 10;
+  padding:1rem;
+  background-color: white;
+}
+
+.hero {
+  display: flex;
+}
+
+.hero:hover {
+  cursor: pointer
+}
+
+.logo{
+  width: 8vw;
+}
+
+.searchField {
+  border: 0.2rem solid black;
+  border-radius: 3rem;
+  width: 30%;
+  height: 3vh;
+  padding: 0.5rem;
+  padding-left: 1rem;
+}
+
+.searchField:focus {
+  outline: none;
+  border-color: red;
+}
+
 .articleContainer {
   display: flex;
   flex-direction: column;
@@ -6,6 +43,40 @@
 }
 
 .modalBtn{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80%;
-  padding: 12px 20px;
+  background-color: transparent;
+  border: none;
+}
+
+.modalBtn:after {
+  content: "";
+  display: block;
+  margin: 0 auto;
+  width: 80%;
+  padding-top: 1rem; 
+  border-bottom: 0.1rem solid gray;
+}
+
+.fishing {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.fishing:hover {
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+.hook {
+  width: 100%;
+  font-weight: bold;
+  font-size: large;
+}
+
+.bait {
+  width: 80%;
 }

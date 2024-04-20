@@ -23,7 +23,14 @@ function NewSearch(query, pageNumber) {
         }).then(result => {
             console.log(result.data)
             setNews(prevNews => {
-                return [...new Set([...prevNews, ...result.data.docs.map(article => article.title)])];
+                return [...new Set([...prevNews, ...result.data.docs.map(article => 
+                    {return {
+                        title: article.title, 
+                        author: article.key,
+                        content: "PLACEHOLDER",
+                    }
+                    }
+                    )])];
             })
             setHasMore(result.data.docs.length > 0)
             setLoading(false);
