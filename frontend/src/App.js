@@ -10,6 +10,7 @@ function App() {
   const [selection, setSelection] = useState('');
   const [tldr, setTldr] = useState('');
   const [content, setContent] = useState('');
+  const [imgURL, setImgURL] = useState('');
 
   const [query, setQuery] = useState('');
   const [pageNumber, setPageNumber] = useState(1);
@@ -85,6 +86,7 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
+                  setImgURL(article.imgurl);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
@@ -101,6 +103,7 @@ function App() {
                   setSelection(article.title);
                   setTldr(article.tldr);
                   setContent(article.content);
+                  setImgURL(article.imgurl);
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
@@ -119,7 +122,8 @@ function App() {
           onClose={() => setOpenModal(false)} 
           title={selection}
           tldr={tldr}
-          content={content}/>
+          content={content}
+          imageURL={imgURL}/>
       </div>
   );
 }
