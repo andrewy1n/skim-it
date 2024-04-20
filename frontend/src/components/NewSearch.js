@@ -18,21 +18,20 @@ function NewSearch(query, pageNumber) {
         axios({
             method: 'GET',
             url: 'http://127.0.0.1:8000/search',
-            params: { q: query, page: pageNumber},
+            params: {page: pageNumber,  q: query},
             cancelToken: new axios.CancelToken(c => cancel = c) //cancel on new query
         }).then(result => {
-            console.log(result.item)
             setNews(prevNews => {
-                return [...new Set([...prevNews, ...result.data.docs.map(article => 
+                return [...new Set([...prevNews, ...result.data.items.map(article => 
                     {return {
                         title: article.title, 
-                        author: article.key,
-                        content: "PLACEHOLDER",
+                        tldr: article.description,
+                        content: article.content,
                     }
                     }
                     )])];
             })
-            setHasMore(result.data.docs.length > 0)
+            setHasMore(result.data.items.length > 0)
             setLoading(false);
         }).catch(e => {
             if (axios.isCancel(e)) return //unless error is a cancel, ignore

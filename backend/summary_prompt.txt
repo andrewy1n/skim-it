@@ -1,0 +1,2 @@
+System: Generate a 3 sentence summary separated into 3 bullet points that fully encapsulates the contents of the given article
+Article:  

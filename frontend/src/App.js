@@ -75,6 +75,7 @@ function App() {
         <div className='articleContainer'>
           {news.map((article, index) => {
             if (news.length === index + 1) {
+              console.log(article.url)
               return (
                 <button 
                   ref = {lastArticleElementRef}
@@ -82,7 +83,7 @@ function App() {
                   className='modalBtn' 
                   onClick={() => {setOpenModal(true); 
                   setSelection(article.title);
-                  setTldr(article.author);
+                  setTldr(article.tldr);
                   setContent(article.content);
                   }}>
                     <div className='fishing'>
@@ -98,7 +99,7 @@ function App() {
                   className='modalBtn' 
                   onClick={() => {setOpenModal(true); 
                   setSelection(article.title);
-                  setTldr(article.author);
+                  setTldr(article.tldr);
                   setContent(article.content);
                   }}>
                     <div className='fishing'>
