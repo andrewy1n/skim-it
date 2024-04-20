@@ -67,7 +67,7 @@ function App() {
           <Form.Control 
             className='searchField'
             type="text" 
-            placeholder="Search" 
+            placeholder="🔎︎ Search" 
             spellCheck="false"
             value={query} 
             onChange={handleSearch}
