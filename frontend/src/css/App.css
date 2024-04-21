@@ -93,6 +93,28 @@
   border-radius: 10px;
 }
 
+.middlePiece {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.blockie {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  width: 10rem;
+}
+
+.error {
+  width: 10rem
+}
+
 .flavor {
   position: fixed;
   bottom: 0;
@@ -101,6 +123,17 @@
   height: auto;
   opacity: 0.3;
   animation: rotate 15s infinite;
+}
+
+.subflavor {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: -2;
+  width: 50vh;
+  height: auto;
+  opacity: 0.3;
+  transform: translate(1rem,5rem);
 }
 
 @keyframes rotate {

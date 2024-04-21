@@ -1,9 +1,12 @@
 import logo from './logo.svg';
+import extra from './extra.svg';
 import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { Form } from 'react-bootstrap'
 import './css/App.css';
 import Modal from './components/Modal'
 import NewSearch from './components/NewSearch';
+import load from './loading.gif';
+import err from './error.png';
 
 function App() {
   const [openModal, setOpenModal] = useState(false);
@@ -76,6 +79,7 @@ function App() {
           />
       </div>
       <img className='flavor' src={logo} alt="Skim-It Logo"></img>
+      <img className='subflavor' src={extra} alt="Extra Text"></img>
       <br />
         <div className='articleContainer'>
           {news.map((article, index) => {
@@ -126,17 +130,19 @@ function App() {
                   }
                   )}
         </div>
-        <div>{loading && 'Loading...'}</div>
-        <div>{error && 'Error'}</div>
-        <Modal 
-          open={openModal} 
-          onClose={() => setOpenModal(false)} 
-          title={selection}
-          tldr={tldr}
-          url={url}
-          imgURL={imgURL}
-          id={id}
-          score={score}/>
+        <div className='blockie'>
+          {loading && <img className='loading' src={load} alt='Loading...'/>}
+          {error && <img className='error' src={err} alt='Loading...'/>}
+          <Modal 
+            open={openModal} 
+            onClose={() => setOpenModal(false)} 
+            title={selection}
+            tldr={tldr}
+            url={url}
+            imgURL={imgURL}
+            id={id}
+            score={score}/>
+          </div>
       </div>
   );
 }

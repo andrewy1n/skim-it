@@ -29,6 +29,7 @@ function NewSearch(query, pageNumber) {
         }).catch(e => {
             if (axios.isCancel(e)) return //unless error is a cancel, ignore
             setError(true);
+            setLoading(false);
         })
         return () => cancel(); //don't send additional get requests whenever query is changed
     }, [query, pageNumber])
