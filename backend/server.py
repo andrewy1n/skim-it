@@ -18,16 +18,16 @@ cred = credentials.Certificate("backend/skim-it-566ae-firebase-adminsdk-420z2-38
 firebase_app = firebase_admin.initialize_app(cred, {'databaseURL':"https://skim-it-566ae-default-rtdb.firebaseio.com"})
 ref = db.reference("/")
 
-ANGOLIA_ADMIN_API_KEY = os.getenv("ALGOLIA_API_KEY")
-ANGOLIA_APP_ID = os.getenv("ALGOLIA_APP")
-client = SearchClient.create(ANGOLIA_APP_ID, ANGOLIA_ADMIN_API_KEY)
+ALGOLIA_ADMIN_API_KEY = os.getenv("ALGOLIA_API_KEY")
+ALGOLIA_APP_ID = os.getenv("ALGOLIA_APP")
+client = SearchClient.create(ALGOLIA_APP_ID, ALGOLIA_ADMIN_API_KEY)
 index = client.init_index('Skim-it')
 
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://10.9.53.113"],
+    allow_origins=["http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
@@ -57,8 +57,12 @@ def search_item(page: int, q: Union[str, None] = None):
         page_count = 0
         subpages = []
         for hit in results['hits']:
-            print(hit)
-            subpages.append(json.loads(hit['_highlightResult']['article']['value']))
+            article_json = hit['_highlightResult']['article']
+            article_json = dict(map(lambda item: (item[0], item[1]['value']) if 'value' in item[1] else (item[0], item[1]), article_json.items()))
+            article_json['key'] = hit['objectID']
+            print(article_json)
+            
+            subpages.append(article_json)
             page_count += 1
             if page_count >= PAGE_LENGTH:
                 results_list.append(subpages[::])
@@ -73,8 +77,8 @@ def search_item(page: int, q: Union[str, None] = None):
         page_count = 0
         subpages = []
         for key, item in list(all_items.items())[:50]:
-            print(item)
-            subpages.append(json.loads(item))
+            item['key'] = key
+            subpages.append(item)
             page_count += 1
             if page_count >= PAGE_LENGTH:
                 results_list.append(subpages[::])
@@ -88,7 +92,6 @@ def increment_score(key: str, is_like: bool):
     # Retrieve current value of score
     article = ref.child(key).get()
 
-    article = json.loads(article)
     # Increment the score
     if is_like:
         article['score'] += 1
@@ -97,6 +100,14 @@ def increment_score(key: str, is_like: bool):
 
     # Update the score in the database
     ref.update({key: article})
+    
+    new_record = {
+        'objectID': key,
+        'article': article
+    }
+    index.save_object(new_record)
+
+    return article['score']
 
 if __name__ == "__main__":
     import uvicorn

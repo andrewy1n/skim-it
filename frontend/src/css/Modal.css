@@ -1,4 +1,4 @@
-h1 {
+h2 {
     margin: 0;
 }
 .modalContainer {
@@ -17,8 +17,8 @@ h1 {
 }
 
 .modalContent {
-    height: 55%;
-    padding-top: 17vw;
+    height: 40%;
+    padding-top: 25vh;
     width: 100%;
     overflow-y: auto;
     display: flex;
@@ -26,6 +26,10 @@ h1 {
     justify-content: center;
     align-items: center;
     scroll-padding-bottom: 2rem;
+}
+
+.modalContent::-webkit-scrollbar {
+    display: none;
 }
 
 .images {
@@ -51,6 +55,35 @@ h1 {
     backdrop-filter: blur(8px);
 }
 
+.vote {
+    border: none;
+    width: 40vw;
+    font-size: 2rem;
+    height: 5vh;
+    background-color: transparent;
+}
+
+.vote:hover {
+    transform: scale(1.2);
+}
+
+.source {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.blockie {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tldrr {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 @media screen and (min-width: 500px) {
     .modalHeader {
         position: sticky;
@@ -62,7 +95,7 @@ h1 {
         background-color: white;
         padding-left: 1rem;
         padding-right: 1rem;
-        gap: 3rem;
+        gap: 1rem;
     }
 }
 

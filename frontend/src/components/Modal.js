@@ -1,8 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import '../css/Modal.css'
 import axios from 'axios'
 
-function Modal({ open, onClose, title, tldr, content, imgURL, key, score }) {
+function Modal({ open, onClose, title, tldr, url, imgURL, id, score }) {
+    const [islike, setIslike] = useState();
+    const [likes, setLikes] = useState(score);
     const modalRef = useRef();
 
     const closeModal = (e) => {
@@ -11,19 +13,27 @@ function Modal({ open, onClose, title, tldr, content, imgURL, key, score }) {
         }
     }
 
+    useEffect(() => {
+        setLikes(score);
+    }, [score])
+
     const handleDislike = () => {
-        axios.put({
+        axios({
             method: 'PUT',
-            url: 'http://10.9.47.164:8000/score',
-            params: { key: key, isLike: false }
+            url: 'http://localhost:8000/score',
+            params: { key: id, is_like: false },
+        }).then(result => {
+            setLikes(result.data);
         })
     }
 
     const handleLike = () => {
-        axios.put({
+        axios({
             method: 'PUT',
-            url: 'http://10.9.47.164:8000/score',
-            params: { key: key, isLike: false }
+            url: 'http://localhost:8000/score',
+            params: { key: id, is_like: true }
+        }).then(result => {
+            setLikes(result.data);
         })
     }
 
@@ -32,7 +42,7 @@ function Modal({ open, onClose, title, tldr, content, imgURL, key, score }) {
         <div ref={modalRef} onClick={closeModal} className='overlay'>
             <div className='modalContainer'>
                 <div className='modalHeader'>
-                    <h1>{title}</h1>
+                    <h2>{title}</h2>
                     <svg xmlns="http://www.w3.org/2000/svg"
                         onClick={onClose} 
                         className='closeButton'
@@ -47,16 +57,18 @@ function Modal({ open, onClose, title, tldr, content, imgURL, key, score }) {
                     alt={'lebron my baby'}
                     ></img>
                     <br />
-                    <div style={{ whiteSpace: 'pre-line' }}>
-                        TL;DR: {tldr}</div>
+                    <div className='blockie' style={{ whiteSpace: 'pre-line' }}>
+                        <div className='tldrr'>tl;dr</div>
+                        <div>{tldr}</div> 
+                    </div>
                     <br />
-                    {/* <div>{content}</div>  <br /> */}
+                    <a className='source' href={url} target="_blank">SOURCE?</a>  <br />
                 </div>
                 <br />
                 <div className='modalHeader'>
-                    <button onClick={handleDislike}>I DISLIKE</button>
-                    <div>{score}</div>
-                    <button onClick={handleLike}>I LIKE</button>
+                    <button className ="vote" onClick = {() => {setIslike(false); handleDislike();}}>👎</button>
+                    <div>{likes}</div>
+                    <button className ="vote" onClick = {() => {setIslike(true); handleLike();}}>👍</button>
                 </div>
             </div>
         </div>

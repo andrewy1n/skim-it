@@ -9,9 +9,9 @@ function App() {
   const [openModal, setOpenModal] = useState(false);
   const [selection, setSelection] = useState('');
   const [tldr, setTldr] = useState('');
-  const [content, setContent] = useState('');
+  const [url, setURL] = useState('');
   const [imgURL, setImgURL] = useState('');
-  const [key, setKey] = useState('');
+  const [id, setID] = useState('');
   const [score, setScore] = useState(0);
 
   const [query, setQuery] = useState('');
@@ -79,6 +79,7 @@ function App() {
       <br />
         <div className='articleContainer'>
           {news.map((article, index) => {
+            console.log(news)
             if (news.length === index + 1) {
               return (
                 <button 
@@ -88,10 +89,11 @@ function App() {
                   onClick={() => {setOpenModal(true); 
                   setSelection(article.title);
                   setTldr(article.tldr);
-                  setContent(article.content);
+                  setURL(article.url);
                   setImgURL(article.urlToImage);
-                  setKey(article.key);
+                  setID(article.key);
                   setScore(article.score);
+
                   }}>
                     <div className='fishing'>
                       <div className='hook'>{article.title}</div>
@@ -108,9 +110,9 @@ function App() {
                   onClick={() => {setOpenModal(true); 
                   setSelection(article.title);
                   setTldr(article.tldr);
-                  setContent(article.content);
+                  setURL(article.url);
                   setImgURL(article.urlToImage);
-                  setKey(article.key);
+                  setID(article.key);
                   setScore(article.score);
                   }}>
                     <div className='fishing'>
@@ -131,9 +133,9 @@ function App() {
           onClose={() => setOpenModal(false)} 
           title={selection}
           tldr={tldr}
-          content={content}
+          url={url}
           imgURL={imgURL}
-          key={key}
+          id={id}
           score={score}/>
       </div>
   );
